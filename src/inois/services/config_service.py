@@ -38,10 +38,18 @@ class ConfigService:
         if Config.KEYS[1] in input_dictionary:
             if not isinstance(input_dictionary[Config.KEYS[1]], list):
                 raise ValueError("Config key '{0}' must be a list, but '{1}' is a {2}".format(Config.KEYS[1], input_dictionary[Config.KEYS[1]], type(input_dictionary[Config.KEYS[1]])))
+            else:
+                for file in input_dictionary[Config.KEYS[1]]:
+                    if not isinstance(file, str):
+                        raise ValueError("Values listed for config key '{0}' must be strings, but '{1}' is a {2}".format(Config.KEYS[1], file, type(file)))
 
         if Config.KEYS[2] in input_dictionary:
             if not isinstance(input_dictionary[Config.KEYS[2]], list):
                 raise ValueError("Config key '{0}' must be a list, but '{1}' is a {2}".format(Config.KEYS[2], input_dictionary[Config.KEYS[2]], type(input_dictionary[Config.KEYS[2]])))
+            else:
+                for column in input_dictionary[Config.KEYS[2]]:
+                    if not isinstance(column, str):
+                        raise ValueError("Values listed for config key '{0}' must be strings, but '{1}' is a {2}".format(Config.KEYS[1], column, type(column)))
 
         if Config.KEYS[3] in input_dictionary:
             if not isinstance(input_dictionary[Config.KEYS[3]], str):
