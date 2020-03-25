@@ -1,0 +1,6 @@
+{
+'working_directory': 'testdirectory',
+'files': ['testfile1', 'testfile2'],
+'columns_to_hash': ['SSN'],
+'username': 'chad',
+}

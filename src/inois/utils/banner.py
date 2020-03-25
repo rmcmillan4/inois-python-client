@@ -1,6 +1,6 @@
 
 class Banner:
-    text = """
+    TEXT = """
 ________________________________________________________________________________
 
 '####:'##::: ##::'#######::'####::'######::
@@ -13,7 +13,7 @@ ________________________________________________________________________________
 ....::..::::..:::.......:::....:::......:::
 
 A CSV file hashing application for securing personally identifiable information.
-Use of this open-source software is subject to the MIT  licence.
+Use of this open-source software is subject to the MIT licence.
 Developed at GSU, 2020.
 ________________________________________________________________________________"""
 
