@@ -11,8 +11,9 @@ class Config:
 
     def __str__(self):
         return """
-    Config Settings...
-    Working Directory: {0},
-    Files to Hash: {1},
-    Columns to Hash: {2}
+---Config Settings---
+Working Directory: {0},
+Files to Hash: {1},
+Columns to Hash: {2}
+---------------------
         """.format(self.WORKING_DIRECTORY, self.FILES, self.COLUMNS_TO_HASH)
