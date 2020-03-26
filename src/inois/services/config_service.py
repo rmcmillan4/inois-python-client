@@ -1,6 +1,7 @@
 import os
 from inois.models.config import Config
 from inois.utils.notifications import Notifications
+from inois.utils.config_keys import ConfigKeys
 
 
 class ConfigService:
@@ -25,38 +26,40 @@ class ConfigService:
             print(Notifications.INVALID_INPUT_FILE_ERROR.format(input_file))
             raise TypeError("Can't convert input file '{0}' to type 'dictionary'. File must be re-formatted to continue".format(input_file))
 
-    @staticmethod
-    def validate_input(input_dictionary):
+    @classmethod
+    def validate_input(cls, input_dictionary):
         for key in input_dictionary:
-            if key not in Config.KEYS:
+            if key not in ConfigKeys.VALID_KEYS:
                 raise ValueError("Key type '{0}' is not supported".format(key))
 
-        if Config.KEYS[0] in input_dictionary:
-            if not isinstance(input_dictionary[Config.KEYS[0]], str):
-                raise ValueError("Config key '{0}' must be a string, but '{1}' is a {2}".format(Config.KEYS[0], input_dictionary[Config.KEYS[0]], type(input_dictionary[Config.KEYS[0]])))
+        if ConfigKeys.WORKING_DIRECTORY in input_dictionary:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.WORKING_DIRECTORY)
 
-        if Config.KEYS[1] in input_dictionary:
-            if not isinstance(input_dictionary[Config.KEYS[1]], list):
-                raise ValueError("Config key '{0}' must be a list, but '{1}' is a {2}".format(Config.KEYS[1], input_dictionary[Config.KEYS[1]], type(input_dictionary[Config.KEYS[1]])))
-            else:
-                for file in input_dictionary[Config.KEYS[1]]:
-                    if not isinstance(file, str):
-                        raise ValueError("Values listed for config key '{0}' must be strings, but '{1}' is a {2}".format(Config.KEYS[1], file, type(file)))
+        if ConfigKeys.FILES in input_dictionary:
+            cls.validate_input_is_list_of_strings(input_dictionary, ConfigKeys.FILES)
 
-        if Config.KEYS[2] in input_dictionary:
-            if not isinstance(input_dictionary[Config.KEYS[2]], list):
-                raise ValueError("Config key '{0}' must be a list, but '{1}' is a {2}".format(Config.KEYS[2], input_dictionary[Config.KEYS[2]], type(input_dictionary[Config.KEYS[2]])))
-            else:
-                for column in input_dictionary[Config.KEYS[2]]:
-                    if not isinstance(column, str):
-                        raise ValueError("Values listed for config key '{0}' must be strings, but '{1}' is a {2}".format(Config.KEYS[1], column, type(column)))
+        if ConfigKeys.COLUMNS_TO_HASH in input_dictionary:
+            cls.validate_input_is_list_of_strings(input_dictionary, ConfigKeys.COLUMNS_TO_HASH)
 
-        if Config.KEYS[3] in input_dictionary:
-            if not isinstance(input_dictionary[Config.KEYS[3]], str):
-                raise ValueError("Config key '{0}' must be a string, but '{1}' is a {2}".format(Config.KEYS[3], input_dictionary[Config.KEYS[3]], type(input_dictionary[Config.KEYS[3]])))
+        if ConfigKeys.USERNAME in input_dictionary:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.USERNAME)
 
     @staticmethod
     def set_config(input_dictionary):
         config = Config(input_dictionary)
         print(config)
         return config
+
+    @staticmethod
+    def validate_input_is_string(input_dictionary, key):
+        if not isinstance(input_dictionary[key], str):
+            raise ValueError("Config key '{0}' must be a string, but '{1}' is a {2}".format(key, input_dictionary[key], type(input_dictionary[key])))
+
+    @staticmethod
+    def validate_input_is_list_of_strings(input_dictionary, key):
+        if not isinstance(input_dictionary[key], list):
+            raise ValueError("Config key '{0}' must be a list, but '{1}' is a {2}".format(key, input_dictionary[key], type(input_dictionary[key])))
+        else:
+            for item in input_dictionary[key]:
+                if not isinstance(item, str):
+                    raise ValueError("Values listed for config key '{0}' must be strings, but '{1}' is a {2}".format(key, item, type(item)))

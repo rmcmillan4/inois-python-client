@@ -12,8 +12,8 @@ ________________________________________________________________________________
 '####: ##::. ##:. #######::'####:. ######::
 ....::..::::..:::.......:::....:::......:::
 
-A CSV file hashing application for securing personally identifiable information.
+A CSV hashing application for securing PID.
 Use of this open-source software is subject to the MIT licence.
-Developed at GSU, 2020.
+Developed at GSU under the supervision of Robert MacMillan, 2020.
 ________________________________________________________________________________"""
 
