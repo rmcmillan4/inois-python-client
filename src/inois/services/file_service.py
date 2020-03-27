@@ -57,8 +57,7 @@ class FileService:
         for file in config.FILES:
             if not os.path.exists(os.path.join(config.WORKING_DIRECTORY, file)):
                 logging.error(Notifications.FILE_NOT_FOUND_ERROR.format(os.path.join(config.WORKING_DIRECTORY, file)))
-                raise FileNotFoundError(
-                    Notifications.FILE_NOT_FOUND_ERROR.format(os.path.join(config.WORKING_DIRECTORY, file)))
+                raise FileNotFoundError(Notifications.FILE_NOT_FOUND_ERROR.format(os.path.join(config.WORKING_DIRECTORY, file)))
             else:
                 logging.info(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
                 print(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
