@@ -48,6 +48,10 @@ class FileService:
             logging.error(Notifications.NO_CSV_FILES_FOUND_IN_FOLDER_ERROR.format(config.WORKING_DIRECTORY))
             raise FileNotFoundError(Notifications.NO_CSV_FILES_FOUND_IN_FOLDER_ERROR.format(config.WORKING_DIRECTORY))
 
+        for file in config.FILES:
+            logging.info(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
+            print(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
+
     @staticmethod
     def locate_csv_files_from_config(config):
         for file in config.FILES:
