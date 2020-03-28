@@ -39,10 +39,11 @@ class FileService:
         if "*" in config.FILES:
             cls.find_all_csv_files_in_working_directory(config)
         else:
-            cls.locate_csv_files_from_config(config)
+            cls.find_all_csv_files_from_config(config)
 
     @staticmethod
     def find_all_csv_files_in_working_directory(config):
+        logging.debug("locating csv files in current working directory")
         config.FILES = glob.glob("*.csv")
         if len(config.FILES) == 0:
             logging.error(Notifications.NO_CSV_FILES_FOUND_IN_FOLDER_ERROR.format(config.WORKING_DIRECTORY))
@@ -53,7 +54,8 @@ class FileService:
             print(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
 
     @staticmethod
-    def locate_csv_files_from_config(config):
+    def find_all_csv_files_from_config(config):
+        logging.debug("locating csv files from input configuration in current working directory")
         for file in config.FILES:
             if not os.path.exists(os.path.join(config.WORKING_DIRECTORY, file)):
                 logging.error(Notifications.FILE_NOT_FOUND_ERROR.format(os.path.join(config.WORKING_DIRECTORY, file)))

@@ -81,8 +81,7 @@ class TestFileServiceClass:
         if "*" in config.FILES:
             for file in config.FILES:
                 assert file in glob.glob("*.csv")
-        else:
-            pass
+
 
 
 
