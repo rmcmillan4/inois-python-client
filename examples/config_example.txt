@@ -1,6 +1,6 @@
 {
     'working_directory': '/Users/chad.mckee/Documents/GSU/inois/examples',
-    'files': ['example_inois_data.csv',],
+    'files': ['example_inois_data.csv', 'example_inois_data3.csv'],
     'columns_to_hash': ['SSN', 'Gov_Id'],
     'csv_delimiter': ','
 }
