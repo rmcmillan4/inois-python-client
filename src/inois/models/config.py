@@ -13,7 +13,7 @@ class Config:
     def __str__(self):
         return """
 ---Config Settings---
-Working Directory: {0},
+Working Directory: '{0}',
 Files to Hash: {1},
 Columns to Hash: {2}
 CSV Delimiter: '{3}'

@@ -3,6 +3,7 @@ import logging
 from inois.utils.banner import Banner
 from inois.services.config_service import ConfigService
 from inois.services.file_service import FileService
+from inois.services.hash_service import HashService
 from inois import __version__
 
 __author__ = "Robert MacMillan"
@@ -21,6 +22,8 @@ def run(input_file):
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
     FileService.validate_files(config)
+    HashService.hash_files(config)
+
 
 
 if __name__ == "__main__":

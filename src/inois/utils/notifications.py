@@ -9,3 +9,6 @@ class Notifications:
     FILE_FOUND = "Located file: {0}"
     NO_CSV_FILES_FOUND_IN_FOLDER_ERROR = "No csv files were found in folder {0}"
     NON_CSV_FILE_EXTENSION_ERROR = "Invalid file extension detected for file {0}, only '.csv' files are supported"
+    EMPTY_CSV_FILE_ERROR = "Failed to find data to parse from csv file {0}"
+    INVALID_CSV_FILE_FORMAT_ERROR = "Failed to parse file {0} as a csv file. Only csv files comprised of plain text are supported."
+    COLUMN_TO_HASH_NOT_FOUND_ERROR = "Failed to locate column '{0}' in csv file '{1}'"
