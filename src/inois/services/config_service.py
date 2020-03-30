@@ -27,8 +27,8 @@ class ConfigService:
                 assert isinstance(config, dict)
                 return config
         except SyntaxError:
-            logging.error(Notifications.INVALID_INPUT_FILE_ERROR.format(input_file))
-            raise TypeError(Notifications.INVALID_INPUT_FILE_ERROR.format(input_file))
+            logging.error(Notifications.INVALID_INPUT_FILE_FORMAT_ERROR.format(input_file))
+            raise TypeError(Notifications.INVALID_INPUT_FILE_FORMAT_ERROR.format(input_file))
 
     @classmethod
     def validate_input(cls, input_dictionary):
@@ -47,8 +47,8 @@ class ConfigService:
         if ConfigKeys.COLUMNS_TO_HASH in input_dictionary:
             cls.validate_input_is_list_of_strings(input_dictionary, ConfigKeys.COLUMNS_TO_HASH)
 
-        if ConfigKeys.USERNAME in input_dictionary:
-            cls.validate_input_is_string(input_dictionary, ConfigKeys.USERNAME)
+        if ConfigKeys.CSV_DELIMITER in input_dictionary:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.CSV_DELIMITER)
 
     @staticmethod
     def set_config(input_dictionary):

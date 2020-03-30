@@ -1,6 +1,7 @@
 import pytest
 from inois.utils.config_keys import ConfigKeys
 from inois.services.config_service import ConfigService
+from inois.application_properties import *
 
 
 class TestConfigServiceClass:
@@ -29,9 +30,9 @@ class TestConfigServiceClass:
         with pytest.raises(ValueError):
             ConfigService.validate_input(config)
 
-    def test_validate_input_with_invalid_user_value(self):
+    def test_validate_input_with_invalid_csv_delimiter_value(self):
         config = ConfigService.read_input('tests/utils/config_example.txt')
-        config[ConfigKeys.USERNAME] = None
+        config[ConfigKeys.CSV_DELIMITER] = 9
         with pytest.raises(ValueError):
             ConfigService.validate_input(config)
 
@@ -63,10 +64,10 @@ class TestConfigServiceClass:
         config_dictionary = ConfigService.read_input('tests/utils/config_example.txt')
         ConfigService.validate_input(config_dictionary)
         config = ConfigService.set_config(config_dictionary)
-        assert config.WORKING_DIRECTORY == config_dictionary[ConfigKeys.WORKING_DIRECTORY] or config.WORKING_DIRECTORY == '.'
+        assert config.WORKING_DIRECTORY == config_dictionary[ConfigKeys.WORKING_DIRECTORY] or config.WORKING_DIRECTORY == DEFAULT_WORKING_DIRECTORY
         assert config.FILES == config_dictionary[ConfigKeys.FILES] or config.FILES == ['*']
-        assert config.COLUMNS_TO_HASH == config_dictionary[ConfigKeys.COLUMNS_TO_HASH] or config.COLUMNS_TO_HASH == 'ssn'
-        assert config.USERNAME == config_dictionary[ConfigKeys.USERNAME] or config.USERNAME is None
+        assert config.COLUMNS_TO_HASH == config_dictionary[ConfigKeys.COLUMNS_TO_HASH] or config.COLUMNS_TO_HASH == DEFAULT_COLUMNS_TO_HASH
+        assert config.CSV_DELIMITER == config_dictionary[ConfigKeys.CSV_DELIMITER] or config.CSV_DELIMITER is DEFAULT_CSV_DELIMiTER
 
     def test_initialize_config(self):
         config = ConfigService.initialize_config('tests/utils/config_example.txt')
@@ -75,5 +76,5 @@ class TestConfigServiceClass:
         assert isinstance(config.FILES[0], str)
         assert isinstance(config.COLUMNS_TO_HASH, list)
         assert isinstance(config.COLUMNS_TO_HASH[0], str)
-        assert isinstance(config.USERNAME, str) or config.USERNAME is None
+        assert isinstance(config.CSV_DELIMITER, str)
 
