@@ -14,4 +14,4 @@ class Notifications:
     COLUMN_TO_HASH_NOT_FOUND_ERROR = "Failed to locate column '{0}' in csv file '{1}'. Ensure column '{0}' exists and/or that the csv delimeter character '{2}' is valid"
     CURRENT_FILE = "current file: '{0}'"
     HASHING_FILES = "Hashing csv files..."
-    HASHING_SUCCESSFUL = "Hashing successful, file '{0}' written to working directory"
+    HASHING_SUCCESSFUL = "hashing successful, file '{0}' written to working directory"

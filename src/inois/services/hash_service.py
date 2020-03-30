@@ -12,7 +12,7 @@ class HashService:
         logging.info(Notifications.HASHING_FILES)
         print("\n" + Notifications.HASHING_FILES)
         for file in config.FILES:
-            logging.debug(Notifications.CURRENT_FILE.format(file))
+            logging.info(Notifications.CURRENT_FILE.format(file))
             print(Notifications.CURRENT_FILE.format(file))
             data = cls.read_csv(file, config)
             cls.verify_columns_to_hash_exist(file, data, config)
