@@ -58,6 +58,6 @@ class HashService:
     def write_hashed_csv(file, data):
         logging.debug("writing hashed csv file {0}".format(file + HASHED_FILE_EXTENSION))
         data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv", encoding=DEFAULT_CSV_ENCODING)
-        #data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv", encoding=DEFAULT_CSV_ENCODING, compression='gzip')
+        #data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", encoding=DEFAULT_CSV_ENCODING, compression='zip')
         logging.info(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
         print(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
