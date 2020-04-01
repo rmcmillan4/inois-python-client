@@ -1,9 +1,11 @@
 import click
 import logging
+import os
 from inois.utils.banner import Banner
 from inois.services.config_service import ConfigService
 from inois.services.file_service import FileService
 from inois.services.hash_service import HashService
+from inois.services.authentication_service import AuthenticationService
 from inois import __version__
 
 __author__ = "Robert MacMillan"
@@ -21,8 +23,11 @@ def run(input_file):
     logging.info("Application Started")
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
+    authorization_service = AuthenticationService()
+    config.SESSION = authorization_service.get_authorization()
     FileService.validate_files(config)
     HashService.hash_files(config)
+    os.chdir(config.LAUNCH_DIRECTORY)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,6 @@
 import pytest
 import os
 import pandas
-import glob
 from inois.application_properties import *
 from inois.services.config_service import ConfigService
 from inois.services.hash_service import HashService

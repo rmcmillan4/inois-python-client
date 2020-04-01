@@ -16,7 +16,7 @@ class ConfigService:
 
     @staticmethod
     def read_input(input_file):
-        logging.debug("reading input file - {0}".format(input_file))
+        logging.debug("reading input file '{0}'".format(input_file))
         if not os.path.exists(input_file):
             logging.error(Notifications.FILE_NOT_FOUND_ERROR.format(input_file))
             raise FileNotFoundError(Notifications.FILE_NOT_FOUND_ERROR.format(input_file))
