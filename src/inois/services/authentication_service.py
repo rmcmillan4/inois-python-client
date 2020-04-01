@@ -9,6 +9,9 @@ from inois.utils.notifications import Notifications
 
 
 class AuthenticationService:
+    AUTHENTICATION_TENANT_AUTHORITY = os.environ['AUTHENTICATION_TENANT_AUTHORITY']
+    AUTHENTICATION_CLIENT_ID = os.environ['AUTHENTICATION_CLIENT_ID']
+    AUTHENTICATION_SCOPE = [os.environ['AUTHENTICATION_SCOPE']]
 
     def __init__(self):
         self.cache = msal.SerializableTokenCache()
@@ -17,14 +20,14 @@ class AuthenticationService:
 
     def initialize_cache(self):
         logging.debug("initializing authentication cache")
-        if os.path.exists("session_cache.bin"):
-            self.cache.deserialize(open("session_cache.bin", "r").read())
+        if os.path.exists(SESSION_CACHE):
+            self.cache.deserialize(open(SESSION_CACHE, "r").read())
 
-        atexit.register(lambda: open("session_cache.bin", "w").write(self.cache.serialize()))
+        atexit.register(lambda: open(SESSION_CACHE, "w").write(self.cache.serialize()))
 
     def initialize_app_instance(self):
         logging.debug("initializing app instance")
-        self.app_instance = msal.PublicClientApplication(AUTHENTICATION_CLIENT_ID, authority=AUTHENTICATION_TENANT_AUTHORITY, token_cache=self.cache)
+        self.app_instance = msal.PublicClientApplication(self.AUTHENTICATION_CLIENT_ID, authority=self.AUTHENTICATION_TENANT_AUTHORITY, token_cache=self.cache)
 
     def initialize_session_from_cache(self):
         logging.debug("attempt to authenticate session from cache")
@@ -32,13 +35,13 @@ class AuthenticationService:
         if user_accounts:
             logging.info(Notifications.PREVIOUS_SESSION_IN_CACHE)
             print(Notifications.PREVIOUS_SESSION_IN_CACHE)
-            self.session = self.app_instance.acquire_token_silent(AUTHENTICATION_SCOPE, account=user_accounts[0])
+            self.session = self.app_instance.acquire_token_silent(self.AUTHENTICATION_SCOPE, account=user_accounts[0])
 
     def initialize_session_from_login(self):
         logging.info(Notifications.AUTHENTICATION_REQUIRED)
         print(Notifications.AUTHENTICATION_REQUIRED)
 
-        device_flow = self.app_instance.initiate_device_flow(scopes=AUTHENTICATION_SCOPE)
+        device_flow = self.app_instance.initiate_device_flow(scopes=self.AUTHENTICATION_SCOPE)
         if "user_code" not in device_flow:
             raise ValueError(
                 "Fail to create device flow. Err: %s" % json.dumps(device_flow, indent=4))
@@ -48,7 +51,7 @@ class AuthenticationService:
         self.session = self.app_instance.acquire_token_by_device_flow(device_flow)
 
     def get_authorization(self):
-        logging.info("obtaining authorization")
+        logging.debug("obtaining authorization")
         self.initialize_cache()
         self.initialize_app_instance()
         self.initialize_session_from_cache()

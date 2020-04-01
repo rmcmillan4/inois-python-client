@@ -19,4 +19,5 @@ Working Directory: '{0}',
 Files to Hash: {1},
 Columns to Hash: {2}
 CSV Delimiter: '{3}'
+---------------------
         """.format(self.WORKING_DIRECTORY, self.FILES, self.COLUMNS_TO_HASH, self.CSV_DELIMITER)
