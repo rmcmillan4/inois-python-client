@@ -48,3 +48,7 @@ MANIFEST
 
 # Per-project virtualenvs
 .venv*/
+
+#others
+session_cache.bin
+examples/*_hash.csv
