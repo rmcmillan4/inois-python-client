@@ -11,6 +11,8 @@ class Config:
         self.FILES = settings.get(ConfigKeys.FILES, DEFAULT_FILES_TO_HASH)
         self.COLUMNS_TO_HASH = settings.get(ConfigKeys.COLUMNS_TO_HASH, DEFAULT_COLUMNS_TO_HASH)
         self.CSV_DELIMITER = settings.get(ConfigKeys.CSV_DELIMITER, DEFAULT_CSV_DELIMiTER)
+        self.HASHED_FILES = []
+        self.ENCRYPTED_FILES = []
 
     def __str__(self):
         return """

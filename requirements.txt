@@ -1,3 +1,4 @@
+cryptography
 msal
 pandas
 click

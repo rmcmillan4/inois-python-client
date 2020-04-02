@@ -18,3 +18,5 @@ class Notifications:
     AUTHENTICATION_SUCCESSFUL = "Authentication successful"
     PREVIOUS_SESSION_IN_CACHE = "Previous application session detected, attempting authentication via refresh token"
     AUTHENTICATION_REQUIRED = "No previous application sessions found, authentication is required"
+    ENCRYPTING_FILES = "Encrypting hashed csv files..."
+    ENCRYPTION_SUCCESSFUL = "encryption successful, file '{0}' written to working directory"

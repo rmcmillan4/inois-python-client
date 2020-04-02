@@ -6,6 +6,7 @@ from inois.services.config_service import ConfigService
 from inois.services.file_service import FileService
 from inois.services.hash_service import HashService
 from inois.services.authentication_service import AuthenticationService
+from inois.services.encryption_service import EncryptionService
 from inois import __version__
 
 __author__ = "Robert MacMillan"
@@ -27,6 +28,7 @@ def run(input_file):
     config.SESSION = authorization_service.get_authorization()
     FileService.validate_files(config)
     HashService.hash_files(config)
+    EncryptionService.encrypt_files(config)
     os.chdir(config.LAUNCH_DIRECTORY)
 
 

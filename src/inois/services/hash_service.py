@@ -17,7 +17,7 @@ class HashService:
             data = cls.read_csv(file, config)
             cls.verify_columns_to_hash_exist(file, data, config)
             cls.hash_csv(file, data, config)
-            cls.write_hashed_csv(file, data)
+            cls.write_hashed_csv(file, data, config)
 
     @staticmethod
     def read_csv(file, config):
@@ -55,9 +55,11 @@ class HashService:
         return hashlib.sha3_512(value.encode() + salt.encode()).hexdigest()
 
     @staticmethod
-    def write_hashed_csv(file, data):
+    def write_hashed_csv(file, data, config):
         logging.debug("writing hashed csv file {0}".format(file + HASHED_FILE_EXTENSION))
         data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv", encoding=DEFAULT_CSV_ENCODING)
+        config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv")
         #data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", encoding=DEFAULT_CSV_ENCODING, compression='zip')
+        #config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip")
         logging.info(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
         print(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
