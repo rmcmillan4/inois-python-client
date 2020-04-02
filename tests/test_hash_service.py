@@ -57,9 +57,9 @@ class TestHashServiceClass:
     def test_write_hashed_csv_with_valid_input(self):
         file_data = HashService.read_csv(self.config.FILES[0], self.config)
         HashService.hash_csv(self.config.FILES[0], file_data, self.config)
-        HashService.write_hashed_csv(self.config.FILES[0], file_data)
-        assert os.path.exists(self.config.FILES[0][:-4] + HASHED_FILE_EXTENSION + ".csv")
-        os.remove(self.config.FILES[0][:-4] + HASHED_FILE_EXTENSION + ".csv")
+        HashService.write_hashed_csv(self.config.FILES[0], file_data, self.config)
+        assert os.path.exists(self.config.HASHED_FILES[0])
+        os.remove(self.config.HASHED_FILES[0])
 
     def test_hash_files(self):
         HashService.hash_files(self.config)
@@ -76,6 +76,6 @@ class TestHashServiceClass:
                 assert column + HASHED_FILE_EXTENSION in hashed_csv_columns
                 assert input_csv[column][0] != hashed_csv[column + HASHED_FILE_EXTENSION][0]
 
-        os.remove(self.config.FILES[0][:-4] + HASHED_FILE_EXTENSION + ".csv")
+        os.remove(self.config.HASHED_FILES[0])
 
 
