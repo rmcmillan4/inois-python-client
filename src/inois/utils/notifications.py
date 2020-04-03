@@ -20,3 +20,4 @@ class Notifications:
     AUTHENTICATION_REQUIRED = "No previous application sessions found, authentication is required"
     ENCRYPTING_FILES = "Encrypting hashed csv files..."
     ENCRYPTION_SUCCESSFUL = "encryption successful, file '{0}' written to working directory"
+    REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR = "Failed to locate required config key {0} in the application config file"

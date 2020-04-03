@@ -50,6 +50,24 @@ class ConfigService:
         if ConfigKeys.CSV_DELIMITER in input_dictionary:
             cls.validate_input_is_string(input_dictionary, ConfigKeys.CSV_DELIMITER)
 
+        if ConfigKeys.AUTHENTICATION_SCOPE not in input_dictionary:
+            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_SCOPE))
+            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_SCOPE))
+        else:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.AUTHENTICATION_SCOPE)
+
+        if ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY not in input_dictionary:
+            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY))
+            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY))
+        else:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY)
+
+        if ConfigKeys.AUTHENTICATION_CLIENT_ID not in input_dictionary:
+            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_CLIENT_ID))
+            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_CLIENT_ID))
+        else:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.AUTHENTICATION_CLIENT_ID)
+
     @staticmethod
     def set_config(input_dictionary):
         logging.debug("setting application config")

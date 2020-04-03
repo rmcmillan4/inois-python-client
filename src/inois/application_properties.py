@@ -5,4 +5,5 @@ DEFAULT_FILES_TO_HASH = ["*"]
 DEFAULT_WORKING_DIRECTORY = "."
 DEFAULT_CSV_ENCODING = "utf_8"
 SESSION_CACHE = "session_cache.bin"
+TEST_CONFIG_FILE_PATH = "tests/utils/config_example.txt"
 

@@ -51,5 +51,4 @@ MANIFEST
 
 #others
 session_cache.bin
-examples/*_hash.csv*
-examples/config_example.txt
+tests/utils/config_example.txt

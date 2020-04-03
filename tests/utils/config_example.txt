@@ -1,6 +1,0 @@
-{
-    'working_directory': './tests/utils/',
-    'files': ['example_inois_data.csv',],
-    'columns_to_hash': ['SSN'],
-    'csv_delimiter': ','
-}

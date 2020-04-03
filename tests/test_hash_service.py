@@ -7,7 +7,7 @@ from inois.services.hash_service import HashService
 
 
 class TestHashServiceClass:
-    config = ConfigService.initialize_config('tests/utils/config_example.txt')
+    config = ConfigService.initialize_config(TEST_CONFIG_FILE_PATH)
 
     def test_read_csv_with_valid_csv_file(self):
         HashService.read_csv(self.config.FILES[0], self.config)
