@@ -52,3 +52,4 @@ MANIFEST
 #others
 session_cache.bin
 tests/utils/config_example.txt
+tests/utils/*_hash*

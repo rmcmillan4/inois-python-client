@@ -54,6 +54,24 @@ class TestConfigServiceClass:
         with pytest.raises(ValueError):
             ConfigService.validate_input(config)
 
+    def test_validate_input_with_nonexistant_auth_scope_key(self):
+        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
+        del config[ConfigKeys.AUTHENTICATION_SCOPE]
+        with pytest.raises(ValueError):
+            ConfigService.validate_input(config)
+
+    def test_validate_input_with_nonexistant_auth_authority_key(self):
+        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
+        del config[ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY]
+        with pytest.raises(ValueError):
+            ConfigService.validate_input(config)
+
+    def test_validate_input_with_nonexistant_client_id_key(self):
+        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
+        del config[ConfigKeys.AUTHENTICATION_CLIENT_ID]
+        with pytest.raises(ValueError):
+            ConfigService.validate_input(config)
+
     def test_validate_input_with_invalid_files_value(self):
         config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
         config[ConfigKeys.FILES] = (TEST_CONFIG_FILE_PATH, )

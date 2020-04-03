@@ -24,7 +24,7 @@ def run(input_file):
     logging.info("Application Started")
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
-    session = AuthenticationService().get_authorization()
+    session = AuthenticationService(config).get_authorization()
     FileService.validate_files(config)
     HashService.hash_files(config)
     EncryptionService.encrypt_files(config)

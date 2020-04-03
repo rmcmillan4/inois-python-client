@@ -9,14 +9,14 @@ from inois.utils.notifications import Notifications
 
 
 class AuthenticationService:
-    AUTHENTICATION_TENANT_AUTHORITY = os.environ['AUTHENTICATION_TENANT_AUTHORITY']
-    AUTHENTICATION_CLIENT_ID = os.environ['AUTHENTICATION_CLIENT_ID']
-    AUTHENTICATION_SCOPE = [os.environ['AUTHENTICATION_SCOPE']]
 
-    def __init__(self):
+    def __init__(self, config):
         self.cache = msal.SerializableTokenCache()
         self.app_instance = None
         self.session = None
+        self.AUTHENTICATION_TENANT_AUTHORITY = config.AUTHENTICATION_TENANT_AUTHORITY
+        self.AUTHENTICATION_CLIENT_ID = config.AUTHENTICATION_CLIENT_ID
+        self.AUTHENTICATION_SCOPE = [config.AUTHENTICATION_SCOPE]
 
     def initialize_cache(self):
         logging.debug("initializing authentication cache")
