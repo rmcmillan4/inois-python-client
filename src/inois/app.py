@@ -12,14 +12,17 @@ from inois import __version__
 __author__ = "Robert MacMillan"
 __copyright__ = "GSU"
 __license__ = "mit"
-# _logger = logging.getLogger(__name__)
-logging.basicConfig(format='%(asctime)s (%(levelname)s): %(message)s', filename='inois.log', level=logging.DEBUG)
 
 
 @click.command()
+@click.option('--log_file', default=None, help='Location to write log file.')
 @click.option('--input_file', prompt='input file', help='Path to the INOIS input configuration file.')
-def run(input_file):
+def run(input_file, log_file):
     """Entry point for the inois hashing application."""
+
+    log_level = logging.DEBUG if log_file else logging.CRITICAL
+    log_location = log_file if log_file else "inois.log"
+    logging.basicConfig(format='%(asctime)s (%(levelname)s): %(message)s', filename=log_location, level=log_level)
 
     logging.info("Application Started")
     print(Banner.TEXT)
