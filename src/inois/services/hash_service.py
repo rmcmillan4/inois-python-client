@@ -3,12 +3,13 @@ import logging
 import hashlib
 from inois.application_properties import *
 from inois.utils.notifications import Notifications
+from inois.utils.api_keys import ApiKeys
 
 
 class HashService:
 
     @classmethod
-    def hash_files(cls, config):
+    def hash_files(cls, config, keys):
         logging.info(Notifications.HASHING_FILES)
         print("\n" + Notifications.HASHING_FILES)
         for file in config.FILES:
@@ -16,7 +17,7 @@ class HashService:
             print(Notifications.CURRENT_FILE.format(file))
             data = cls.read_csv(file, config)
             cls.verify_columns_to_hash_exist(file, data, config)
-            cls.hash_csv(file, data, config)
+            cls.hash_csv(file, data, config, keys)
             cls.write_hashed_csv(file, data, config)
 
     @staticmethod
@@ -45,10 +46,10 @@ class HashService:
                 raise ValueError(Notifications.COLUMN_TO_HASH_NOT_FOUND_ERROR.format(column_to_hash, file, config.CSV_DELIMITER))
 
     @classmethod
-    def hash_csv(cls, file, data, config):
+    def hash_csv(cls, file, data, config, keys):
         logging.debug("hashing csv file {0}".format(file))
         for column_to_hash in config.COLUMNS_TO_HASH:
-            data[column_to_hash + HASHED_FILE_EXTENSION] = data[column_to_hash].apply(cls.hash_value, args=("salt_key_placeholder",))
+            data[column_to_hash + HASHED_FILE_EXTENSION] = data[column_to_hash].apply(cls.hash_value, args=(keys[ApiKeys.SALT_KEYS][0][ApiKeys.SALT_VALUE],))
 
     @staticmethod
     def hash_value(value, salt):

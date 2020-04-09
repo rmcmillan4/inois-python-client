@@ -32,7 +32,7 @@ def run(input_file, log_file):
     FileService.validate_files(config)
     keys = KeyService.get_keys(config, session)
     #print(keys)
-    HashService.hash_files(config)
+    HashService.hash_files(config, keys)
     EncryptionService.encrypt_files(config)
     os.chdir(config.LAUNCH_DIRECTORY)
 

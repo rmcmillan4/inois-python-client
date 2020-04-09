@@ -4,6 +4,7 @@ import pandas
 from inois.application_properties import *
 from inois.services.config_service import ConfigService
 from inois.services.hash_service import HashService
+from inois.utils.api_keys import ApiKeys
 
 
 class TestHashServiceClass:
@@ -41,8 +42,9 @@ class TestHashServiceClass:
 
     def test_hash_csv_with_valid_input(self):
         self.config.COLUMNS_TO_HASH = ['SSN']
+        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "test-encryption-key"}
         file_data = HashService.read_csv(self.config.FILES[0], self.config)
-        HashService.hash_csv(self.config.FILES[0], file_data, self.config)
+        HashService.hash_csv(self.config.FILES[0], file_data, self.config, mock_keys)
 
     def test_hash_value(self):
         value = "123456789"
@@ -56,13 +58,15 @@ class TestHashServiceClass:
 
     def test_write_hashed_csv_with_valid_input(self):
         file_data = HashService.read_csv(self.config.FILES[0], self.config)
-        HashService.hash_csv(self.config.FILES[0], file_data, self.config)
+        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "test-encryption-key"}
+        HashService.hash_csv(self.config.FILES[0], file_data, self.config, mock_keys)
         HashService.write_hashed_csv(self.config.FILES[0], file_data, self.config)
         assert os.path.exists(self.config.HASHED_FILES[0])
         os.remove(self.config.HASHED_FILES[0])
 
     def test_hash_files(self):
-        HashService.hash_files(self.config)
+        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "test-encryption-key"}
+        HashService.hash_files(self.config, mock_keys)
         input_csv = pandas.read_csv(self.config.FILES[0], delimiter=self.config.CSV_DELIMITER, dtype=object, encoding=DEFAULT_CSV_ENCODING)
         hashed_csv_file_name = self.config.FILES[0][:-4] + HASHED_FILE_EXTENSION + ".csv"
         hashed_csv = pandas.read_csv(hashed_csv_file_name, delimiter=self.config.CSV_DELIMITER, dtype=object, encoding=DEFAULT_CSV_ENCODING)
