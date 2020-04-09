@@ -21,3 +21,8 @@ class Notifications:
     ENCRYPTING_FILES = "Encrypting hashed csv files..."
     ENCRYPTION_SUCCESSFUL = "encryption successful, file '{0}' written to working directory"
     REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR = "Failed to locate required config key {0} in the application config file"
+    FETCHING_API_KEYS = "Fetching salt and encryption keys from the inois api..."
+    API_KEY_FETCH_ERROR = "An error occured while fetching the salt and encryption keys from the api.  The server returned a response of '{0}'"
+    API_KEY_FETCH_RESPONSE_FORMAT_ERROR = "The response from the api key fetch did not include required key '{0}'"
+    EMPTY_SALT_KEY_ERROR = "The list of salt keys returned by the api is empty"
+    API_KEY_FETCH_SUCCESSFUL = "successfully fetched salt and encryption keys"
