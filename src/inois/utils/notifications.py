@@ -26,3 +26,6 @@ class Notifications:
     API_KEY_FETCH_RESPONSE_FORMAT_ERROR = "The response from the api key fetch did not include required key '{0}'"
     EMPTY_SALT_KEY_ERROR = "The list of salt keys returned by the api is empty"
     API_KEY_FETCH_SUCCESSFUL = "successfully fetched salt and encryption keys"
+    UPLOADING_FILES = "Uploading encrypted files to the inois api.."
+    FILE_SUCCESSFULLY_UPLOADED = "{0} successfully uploaded"
+    FILE_UPLOAD_FAILED = "Failed to upload file {0}, the server returned a response of '{1}'"

@@ -7,5 +7,7 @@ DEFAULT_CSV_ENCODING = "utf_8"
 SESSION_CACHE = "session_cache.bin"
 TEST_CONFIG_FILE_PATH = "tests/utils/config_example.txt"
 INOIS_API_URL = "https://gsu-inois-dev.azurewebsites.net"
+#INOIS_API_URL = "http://localhost:8080"
 INOIS_API_KEY_SERVICE_ROUTE = "/api/keys"
+INOIS_API_UPLOAD_URL = "/api/upload"
 
