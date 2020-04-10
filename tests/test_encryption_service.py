@@ -12,10 +12,10 @@ class TestEncryptionServiceClass:
 
     def test_encrypt_files(self):
         config = ConfigService.initialize_config(TEST_CONFIG_FILE_PATH)
-        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "test-encryption-key"}
+        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "_hSmVyMTLi-Qo_rmISp8jrH5Aob7frHp1X-28sxQZAU="}
         FileService.validate_files(config)
         HashService.hash_files(config, mock_keys)
-        EncryptionService.encrypt_files(config)
+        EncryptionService.encrypt_files(config, mock_keys)
         assert len(config.ENCRYPTED_FILES) > 0
         os.remove(config.ENCRYPTED_FILES[0])
         os.remove(config.HASHED_FILES[0])

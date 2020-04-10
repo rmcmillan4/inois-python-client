@@ -1,16 +1,18 @@
 import logging
 from cryptography.fernet import Fernet
 from inois.utils.notifications import Notifications
+from inois.utils.api_keys import ApiKeys
 
 
 class EncryptionService:
 
     @classmethod
-    def encrypt_files(cls, config, key=Fernet.generate_key()):
+    def encrypt_files(cls, config, keys):
         logging.info(Notifications.ENCRYPTING_FILES)
         print("\n" + Notifications.ENCRYPTING_FILES)
+        encryption_key = keys[ApiKeys.ENCRYPTION_KEY].encode()
         for file in config.HASHED_FILES:
-            cls.encrypt_hashed_csv_file(file, key, config)
+            cls.encrypt_hashed_csv_file(file, encryption_key, config)
 
     @staticmethod
     def encrypt_hashed_csv_file(file, key, config):

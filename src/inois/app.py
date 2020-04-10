@@ -33,7 +33,7 @@ def run(input_file, log_file):
     keys = KeyService.get_keys(config, session)
     #print(keys)
     HashService.hash_files(config, keys)
-    EncryptionService.encrypt_files(config)
+    EncryptionService.encrypt_files(config, keys)
     os.chdir(config.LAUNCH_DIRECTORY)
 
 
