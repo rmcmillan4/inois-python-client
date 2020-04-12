@@ -30,7 +30,7 @@ class UploadService:
             logging.error(Notifications.FILE_UPLOAD_FAILED.format(file, api_response.status_code))
             raise RuntimeError(Notifications.FILE_UPLOAD_FAILED.format(file, api_response.status_code))
 
-        logging.info(Notifications.FILE_SUCCESSFULLY_UPLOADED.format(file))
-        print(Notifications.FILE_SUCCESSFULLY_UPLOADED.format(file))
+        logging.info(Notifications.FILE_SUCCESSFULLY_UPLOADED.format(file, api_response.text[12:-2]))
+        print(Notifications.FILE_SUCCESSFULLY_UPLOADED.format(file, api_response.text[12:-2]))
 
 
