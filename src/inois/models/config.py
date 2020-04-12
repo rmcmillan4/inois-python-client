@@ -10,7 +10,7 @@ class Config:
         self.WORKING_DIRECTORY = settings.get(ConfigKeys.WORKING_DIRECTORY, DEFAULT_WORKING_DIRECTORY)
         self.FILES = settings.get(ConfigKeys.FILES, DEFAULT_FILES_TO_HASH)
         self.COLUMNS_TO_HASH = settings.get(ConfigKeys.COLUMNS_TO_HASH, DEFAULT_COLUMNS_TO_HASH)
-        self.CSV_DELIMITER = settings.get(ConfigKeys.CSV_DELIMITER, DEFAULT_CSV_DELIMiTER)
+        self.CSV_DELIMITER = DEFAULT_CSV_DELIMITER
         self.AUTHENTICATION_CLIENT_ID = settings.get(ConfigKeys.AUTHENTICATION_CLIENT_ID, None)
         self.AUTHENTICATION_TENANT_AUTHORITY = settings.get(ConfigKeys.AUTHENTICATION_TENANT_AUTHORITY, None)
         self.AUTHENTICATION_SCOPE = settings.get(ConfigKeys.AUTHENTICATION_SCOPE, None)

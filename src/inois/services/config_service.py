@@ -47,9 +47,6 @@ class ConfigService:
         if ConfigKeys.COLUMNS_TO_HASH in input_dictionary:
             cls.validate_input_is_list_of_strings(input_dictionary, ConfigKeys.COLUMNS_TO_HASH)
 
-        if ConfigKeys.CSV_DELIMITER in input_dictionary:
-            cls.validate_input_is_string(input_dictionary, ConfigKeys.CSV_DELIMITER)
-
         if ConfigKeys.AUTHENTICATION_SCOPE not in input_dictionary:
             logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_SCOPE))
             raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.AUTHENTICATION_SCOPE))

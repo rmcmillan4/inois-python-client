@@ -30,12 +30,6 @@ class TestConfigServiceClass:
         with pytest.raises(ValueError):
             ConfigService.validate_input(config)
 
-    def test_validate_input_with_invalid_csv_delimiter_value(self):
-        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
-        config[ConfigKeys.CSV_DELIMITER] = 9
-        with pytest.raises(ValueError):
-            ConfigService.validate_input(config)
-
     def test_validate_input_with_invalid_auth_scope_value(self):
         config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
         config[ConfigKeys.AUTHENTICATION_SCOPE] = 9
@@ -103,7 +97,6 @@ class TestConfigServiceClass:
         assert config.WORKING_DIRECTORY == config_dictionary[ConfigKeys.WORKING_DIRECTORY] or config.WORKING_DIRECTORY == DEFAULT_WORKING_DIRECTORY
         assert config.FILES == config_dictionary[ConfigKeys.FILES] or config.FILES == ['*']
         assert config.COLUMNS_TO_HASH == config_dictionary[ConfigKeys.COLUMNS_TO_HASH] or config.COLUMNS_TO_HASH == DEFAULT_COLUMNS_TO_HASH
-        assert config.CSV_DELIMITER == config_dictionary[ConfigKeys.CSV_DELIMITER] or config.CSV_DELIMITER is DEFAULT_CSV_DELIMiTER
         assert config.AUTHENTICATION_CLIENT_ID is not None
         assert config.AUTHENTICATION_TENANT_AUTHORITY is not None
         assert config.AUTHENTICATION_SCOPE is not None
