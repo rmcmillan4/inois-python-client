@@ -1,5 +1,6 @@
 import os
 import logging
+from datetime import datetime
 from inois.models.config import Config
 from inois.utils.notifications import Notifications
 from inois.utils.config_keys import ConfigKeys
@@ -65,6 +66,20 @@ class ConfigService:
         else:
             cls.validate_input_is_string(input_dictionary, ConfigKeys.AUTHENTICATION_CLIENT_ID)
 
+        if ConfigKeys.START_DATE not in input_dictionary:
+            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.START_DATE))
+            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.START_DATE))
+        else:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.START_DATE)
+            cls.validate_input_is_date(input_dictionary, ConfigKeys.START_DATE)
+
+        if ConfigKeys.END_DATE not in input_dictionary:
+            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.END_DATE))
+            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.END_DATE))
+        else:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.END_DATE)
+            cls.validate_input_is_date(input_dictionary, ConfigKeys.END_DATE)
+
     @staticmethod
     def set_config(input_dictionary):
         logging.debug("setting application config")
@@ -89,3 +104,11 @@ class ConfigService:
                 if not isinstance(item, str):
                     logging.error(Notifications.INVALID_LIST_ITEM_TYPE_ERROR.format(key, "strings", item, type(item)))
                     raise ValueError(Notifications.INVALID_LIST_ITEM_TYPE_ERROR.format(key, "strings", item, type(item)))
+
+    @staticmethod
+    def validate_input_is_date(input_dictionary, key):
+        try:
+            input_dictionary[key] = datetime.strptime(input_dictionary[key], '%m-%d-%Y').date()
+        except ValueError:
+            logging.error(Notifications.INVALID_DATE_FORMAT_ERROR.format(input_dictionary[key], key))
+            raise ValueError(Notifications.INVALID_DATE_FORMAT_ERROR.format(input_dictionary[key], key))

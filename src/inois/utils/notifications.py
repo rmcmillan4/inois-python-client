@@ -20,7 +20,7 @@ class Notifications:
     AUTHENTICATION_REQUIRED = "No previous application sessions found, authentication is required"
     ENCRYPTING_FILES = "Encrypting hashed csv files..."
     ENCRYPTION_SUCCESSFUL = "encryption successful, file '{0}' written to working directory"
-    REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR = "Failed to locate required config key {0} in the application config file"
+    REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR = "Failed to locate required config key '{0}' in the application config file"
     FETCHING_API_KEYS = "Fetching salt and encryption keys from the inois api..."
     API_KEY_FETCH_ERROR = "An error occured while fetching the salt and encryption keys from the api.  The server returned a response of '{0}'"
     API_KEY_FETCH_RESPONSE_FORMAT_ERROR = "The response from the api key fetch did not include required key '{0}'"
@@ -29,3 +29,4 @@ class Notifications:
     UPLOADING_FILES = "Uploading encrypted files to the inois api.."
     FILE_SUCCESSFULLY_UPLOADED = "{0} successfully uploaded with batch id '{1}'"
     FILE_UPLOAD_FAILED = "Failed to upload file {0}, the server returned a response of '{1}'"
+    INVALID_DATE_FORMAT_ERROR = "Invalid date format '{0}' detected for key {1}.  A value with format 'MM-DD-YYYY' (e.g., '09-09-2019')is required"

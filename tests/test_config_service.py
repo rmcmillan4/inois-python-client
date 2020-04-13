@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from inois.utils.config_keys import ConfigKeys
 from inois.services.config_service import ConfigService
 from inois.application_properties import *
@@ -90,6 +91,18 @@ class TestConfigServiceClass:
         with pytest.raises(ValueError):
             ConfigService.validate_input(config)
 
+    def test_validate_input_with_invalid_start_date(self):
+        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
+        config[ConfigKeys.START_DATE] = 9
+        with pytest.raises(ValueError):
+            ConfigService.validate_input(config)
+
+    def test_validate_input_with_invalid_end_date(self):
+        config = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
+        config[ConfigKeys.START_DATE] = '9-9-99'
+        with pytest.raises(ValueError):
+            ConfigService.validate_input(config)
+
     def test_set_config(self):
         config_dictionary = ConfigService.read_input(TEST_CONFIG_FILE_PATH)
         ConfigService.validate_input(config_dictionary)
@@ -100,6 +113,8 @@ class TestConfigServiceClass:
         assert config.AUTHENTICATION_CLIENT_ID is not None
         assert config.AUTHENTICATION_TENANT_AUTHORITY is not None
         assert config.AUTHENTICATION_SCOPE is not None
+        assert config.START_DATE is not None
+        assert config.END_DATE is not None
 
     def test_initialize_config(self):
         config = ConfigService.initialize_config(TEST_CONFIG_FILE_PATH)

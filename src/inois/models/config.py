@@ -16,6 +16,8 @@ class Config:
         self.AUTHENTICATION_SCOPE = settings.get(ConfigKeys.AUTHENTICATION_SCOPE, None)
         self.HASHED_FILES = []
         self.ENCRYPTED_FILES = []
+        self.START_DATE = settings.get(ConfigKeys.START_DATE, None)
+        self.END_DATE = settings.get(ConfigKeys.END_DATE, None)
 
     def __str__(self):
         return """
