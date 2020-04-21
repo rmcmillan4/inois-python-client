@@ -51,9 +51,22 @@ class HashService:
         for column_to_hash in config.COLUMNS_TO_HASH:
             data[column_to_hash + HASHED_FILE_EXTENSION] = data[column_to_hash].apply(cls.hash_value, args=(keys[ApiKeys.SALT_KEYS][0][ApiKeys.SALT_VALUE],))
 
+        for column_to_hash in config.COLUMNS_TO_HASH:
+            data[column_to_hash + PREVIOUS_HASH_COLUMN_EXTENSION] = data[column_to_hash].apply(cls.generate_previous_hashes, args=(keys[ApiKeys.SALT_KEYS],))
+
     @staticmethod
     def hash_value(value, salt):
         return hashlib.sha3_512(value.encode() + salt.encode()).hexdigest()
+
+    @staticmethod
+    def generate_previous_hashes(value, salts):
+        previous_hash_string = ""
+        if len(salts) == 1:
+            return previous_hash_string
+        for salt in salts[1:]:
+            previous_hash_string += hashlib.sha3_512(value.encode() + salt[ApiKeys.SALT_VALUE].encode()).hexdigest() + " "
+
+        return previous_hash_string
 
     @staticmethod
     def write_hashed_csv(file, data, config):

@@ -53,3 +53,4 @@ MANIFEST
 session_cache.bin
 tests/utils/config_example.txt
 tests/utils/*_hash*
+tests/utils/Mock_DFCS_Data.csv
