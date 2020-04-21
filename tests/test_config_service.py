@@ -1,5 +1,4 @@
 import pytest
-from datetime import datetime
 from inois.utils.config_keys import ConfigKeys
 from inois.services.config_service import ConfigService
 from inois.application_properties import *
