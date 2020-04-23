@@ -18,13 +18,19 @@ class Config:
         self.ENCRYPTED_FILES = []
         self.START_DATE = settings.get(ConfigKeys.START_DATE, None)
         self.END_DATE = settings.get(ConfigKeys.END_DATE, None)
+        self.COLUMN_TO_SEARCH = settings.get(ConfigKeys.COLUMN_TO_SEARCH, None)
 
     def __str__(self):
         return """
 ---Config Settings---
-Working Directory: '{0}',
-Files to Hash: {1},
+Working Directory: '{0}'
+Files to Hash: {1}
 Columns to Hash: {2}
 CSV Delimiter: '{3}'
+Column to Search: '{4}'
+Data Start Date: '{5}'
+Data End Date: '{5}'
 ---------------------
-        """.format(self.WORKING_DIRECTORY, self.FILES, self.COLUMNS_TO_HASH, self.CSV_DELIMITER)
+        """.format(self.WORKING_DIRECTORY, self.FILES, self.COLUMNS_TO_HASH,
+                   self.CSV_DELIMITER, self.COLUMN_TO_SEARCH, self.START_DATE,
+                   self.END_DATE)

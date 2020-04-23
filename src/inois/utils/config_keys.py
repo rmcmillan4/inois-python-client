@@ -7,6 +7,7 @@ class ConfigKeys:
     AUTHENTICATION_SCOPE = "authentication_scope"
     START_DATE = "data_start_date"
     END_DATE = "data_end_date"
+    COLUMN_TO_SEARCH = "column_to_search"
 
     VALID_KEYS = (
         WORKING_DIRECTORY,
@@ -16,5 +17,6 @@ class ConfigKeys:
         AUTHENTICATION_TENANT_AUTHORITY,
         AUTHENTICATION_SCOPE,
         START_DATE,
-        END_DATE
+        END_DATE,
+        COLUMN_TO_SEARCH
     )

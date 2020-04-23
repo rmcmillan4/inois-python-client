@@ -67,18 +67,19 @@ class ConfigService:
             cls.validate_input_is_string(input_dictionary, ConfigKeys.AUTHENTICATION_CLIENT_ID)
 
         if ConfigKeys.START_DATE not in input_dictionary:
-            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.START_DATE))
-            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.START_DATE))
+            input_dictionary[ConfigKeys.START_DATE] = datetime.now().date()
         else:
             cls.validate_input_is_string(input_dictionary, ConfigKeys.START_DATE)
             cls.validate_input_is_date(input_dictionary, ConfigKeys.START_DATE)
 
         if ConfigKeys.END_DATE not in input_dictionary:
-            logging.error(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.END_DATE))
-            raise ValueError(Notifications.REQUIRED_CONFIG_KEY_NOT_FOUND_ERROR.format(ConfigKeys.END_DATE))
+            input_dictionary[ConfigKeys.END_DATE] = datetime.now().date()
         else:
             cls.validate_input_is_string(input_dictionary, ConfigKeys.END_DATE)
             cls.validate_input_is_date(input_dictionary, ConfigKeys.END_DATE)
+
+        if ConfigKeys.COLUMN_TO_SEARCH in input_dictionary:
+            cls.validate_input_is_string(input_dictionary, ConfigKeys.COLUMN_TO_SEARCH)
 
     @staticmethod
     def set_config(input_dictionary):
