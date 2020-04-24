@@ -27,24 +27,27 @@ def run(input_file, log_file, mode):
     log_level = logging.DEBUG if log_file else logging.CRITICAL
     log_location = log_file if log_file else "inois.log"
     logging.basicConfig(format='%(asctime)s (%(levelname)s): %(message)s', filename=log_location, level=log_level)
+
     application_mode = mode if mode == ApplicationModeKeys.SEARCH else ApplicationModeKeys.UPLOAD
+
     logging.info("Application Started in '{0}' mode".format(application_mode))
     print(Banner.TEXT)
-
     config = ConfigService.initialize_config(input_file=input_file)
     session = AuthenticationService(config).get_authorization()
     print(session['access_token'])
     FileService.validate_files(config)
+    keys = KeyService.get_keys(config, session)
 
     if application_mode == ApplicationModeKeys.UPLOAD:
-        keys = KeyService.get_keys(config, session)
         HashService.hash_files(config, keys)
         EncryptionService.encrypt_files(config, keys)
         UploadService.upload_files(config, session)
-        os.chdir(config.LAUNCH_DIRECTORY)
 
     elif application_mode == ApplicationModeKeys.SEARCH:
         print("Search Mode Active")
+        search_queries = HashService.hash_records_for_search(config, keys)
+
+    os.chdir(config.LAUNCH_DIRECTORY)
 
 
 if __name__ == "__main__":

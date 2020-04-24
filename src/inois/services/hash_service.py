@@ -20,6 +20,22 @@ class HashService:
             cls.hash_csv(file, data, config, keys)
             cls.write_hashed_csv(file, data, config)
 
+    @classmethod
+    def hash_records_for_search(cls, config, keys):
+        logging.info(Notifications.HASHING_SEARCH_ENTRIES)
+        print("\n" + Notifications.HASHING_SEARCH_ENTRIES)
+        search_queries = {}
+        for file in config.FILES:
+            logging.info(Notifications.CURRENT_FILE.format(file))
+            print(Notifications.CURRENT_FILE.format(file))
+            data = cls.read_csv(file, config)
+            cls.verify_column_to_search_exists(file, data, config)
+            cls.hash_entries_for_search(search_queries, data, config, keys)
+            logging.info(Notifications.HASHING_SEARCH_ENTRIES_SUCCESSFUL)
+            print(Notifications.HASHING_SEARCH_ENTRIES_SUCCESSFUL.format(file))
+
+        return search_queries
+
     @staticmethod
     def read_csv(file, config):
         logging.debug("reading file".format(file))
@@ -45,6 +61,14 @@ class HashService:
                 logging.error(Notifications.COLUMN_TO_HASH_NOT_FOUND_ERROR.format(column_to_hash, file, config.CSV_DELIMITER))
                 raise ValueError(Notifications.COLUMN_TO_HASH_NOT_FOUND_ERROR.format(column_to_hash, file, config.CSV_DELIMITER))
 
+    @staticmethod
+    def verify_column_to_search_exists(file, data, config):
+        logging.debug("verifying column to search exists")
+        columns_in_csv = data.columns.values.tolist()
+        if config.COLUMN_TO_SEARCH not in columns_in_csv:
+            logging.error(Notifications.COLUMN_TO_HASH_NOT_FOUND_ERROR.format(config.COLUMN_TO_SEARCH, file, config.CSV_DELIMITER))
+            raise ValueError(Notifications.COLUMN_TO_HASH_NOT_FOUND_ERROR.format(config.COLUMN_TO_SEARCH, file, config.CSV_DELIMITER))
+
     @classmethod
     def hash_csv(cls, file, data, config, keys):
         logging.debug("hashing csv file {0}".format(file))
@@ -53,6 +77,16 @@ class HashService:
 
         for column_to_hash in config.COLUMNS_TO_HASH:
             data[column_to_hash + PREVIOUS_HASH_COLUMN_EXTENSION] = data[column_to_hash].apply(cls.generate_previous_hashes, args=(keys[ApiKeys.SALT_KEYS],))
+
+    @classmethod
+    def hash_entries_for_search(cls, search_queries, data, config, keys):
+        logging.debug("hashing input data to query")
+        column_data = data[config.COLUMN_TO_SEARCH].tolist()
+        for entry in column_data:
+            hash_versions = []
+            for salt_key in keys[ApiKeys.SALT_KEYS]:
+                hash_versions.append(cls.hash_value(entry, salt_key[ApiKeys.SALT_VALUE]))
+            search_queries[entry] = hash_versions
 
     @staticmethod
     def hash_value(value, salt):

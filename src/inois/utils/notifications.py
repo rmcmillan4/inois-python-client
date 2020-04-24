@@ -30,3 +30,5 @@ class Notifications:
     FILE_SUCCESSFULLY_UPLOADED = "{0} successfully uploaded with batch id '{1}'"
     FILE_UPLOAD_FAILED = "Failed to upload file {0}, the server returned a response of '{1}'"
     INVALID_DATE_FORMAT_ERROR = "Invalid date format '{0}' detected for key {1}.  A value with format 'MM-DD-YYYY' (e.g., '09-09-2019') is required"
+    HASHING_SEARCH_ENTRIES = "Hashing search data..."
+    HASHING_SEARCH_ENTRIES_SUCCESSFUL = "successfully hashed search entries to query for file '{0}'"
