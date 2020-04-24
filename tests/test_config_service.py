@@ -114,6 +114,7 @@ class TestConfigServiceClass:
         assert config.AUTHENTICATION_SCOPE is not None
         assert config.START_DATE is not None
         assert config.END_DATE is not None
+        assert config.COLUMN_TO_SEARCH == config_dictionary[ConfigKeys.COLUMN_TO_SEARCH] or config.COLUMN_TO_SEARCH is None
 
     def test_initialize_config(self):
         config = ConfigService.initialize_config(TEST_CONFIG_FILE_PATH)
