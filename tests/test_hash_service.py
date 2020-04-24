@@ -82,4 +82,12 @@ class TestHashServiceClass:
 
         os.remove(self.config.HASHED_FILES[0])
 
+    def test_hash_records_for_search(self):
+        mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "_hSmVyMTLi-Qo_rmISp8jrH5Aob7frHp1X-28sxQZAU="}
+        search_queries = HashService.hash_records_for_search(self.config, mock_keys)
+        assert search_queries.keys() is not None
+        for key in search_queries:
+            assert isinstance(search_queries[key], list)
+            assert isinstance(search_queries[key][0], str)
+
 
