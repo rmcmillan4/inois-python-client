@@ -32,3 +32,7 @@ class Notifications:
     INVALID_DATE_FORMAT_ERROR = "Invalid date format '{0}' detected for key {1}.  A value with format 'MM-DD-YYYY' (e.g., '09-09-2019') is required"
     HASHING_SEARCH_ENTRIES = "Hashing search data..."
     HASHING_SEARCH_ENTRIES_SUCCESSFUL = "successfully hashed search entries to query for file '{0}'"
+    EXECUTING_SEARCH = "Executing search queries using hashed data..."
+    CURRENT_DATUM_QUERY = "Current datum query: {0}"
+    DATUM_QUERY_FAILED = "Failed to query datum {0}, the server returned a response of '{1}'"
+    DATUM_QUERY_SUCCESSFUL = "Successfully queried datum, \n{0}"

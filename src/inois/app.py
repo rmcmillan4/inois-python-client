@@ -9,6 +9,7 @@ from inois.services.authentication_service import AuthenticationService
 from inois.services.encryption_service import EncryptionService
 from inois.services.key_service import KeyService
 from inois.services.upload_service import UploadService
+from inois.services.search_service import SearchService
 from inois.utils.application_mode_keys import ApplicationModeKeys
 from inois import __version__
 
@@ -44,8 +45,8 @@ def run(input_file, log_file, mode):
         UploadService.upload_files(config, session)
 
     elif application_mode == ApplicationModeKeys.SEARCH:
-        print("Search Mode Active")
         search_queries = HashService.hash_records_for_search(config, keys)
+        SearchService.search_on_all_queries(search_queries, session)
 
     os.chdir(config.LAUNCH_DIRECTORY)
 
