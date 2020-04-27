@@ -35,4 +35,4 @@ class Notifications:
     EXECUTING_SEARCH = "Executing search queries using hashed data..."
     CURRENT_DATUM_QUERY = "Current datum query: {0}"
     DATUM_QUERY_FAILED = "Failed to query datum {0}, the server returned a response of '{1}'"
-    DATUM_QUERY_SUCCESSFUL = "Successfully queried datum, \n{0}"
+    DATUM_QUERY_SUCCESSFUL = "Successfully queried datum. {0} records located:"

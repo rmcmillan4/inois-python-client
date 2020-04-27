@@ -12,5 +12,5 @@ TEST_DATA_FILE_PATH = "tests/utils/example_inois_data.csv"
 INOIS_API_URL = "http://localhost:8080"
 INOIS_API_KEY_SERVICE_ROUTE = "/api/keys"
 INOIS_API_UPLOAD_URL = "/api/upload"
-INOIS_API_UPLOAD_URL = "/api/search"
+INOIS_API_SEARCH_URL = "/api/search"
 

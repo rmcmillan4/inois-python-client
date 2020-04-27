@@ -2,6 +2,7 @@ from inois.application_properties import *
 from inois.utils.notifications import Notifications
 import requests
 import logging
+import json
 
 
 class SearchService:
@@ -21,7 +22,7 @@ class SearchService:
         print(Notifications.CURRENT_DATUM_QUERY.format(search_datum))
 
         api_response = requests.post(
-            INOIS_API_URL + INOIS_API_UPLOAD_URL,
+            INOIS_API_URL + INOIS_API_SEARCH_URL,
             headers={'Authorization': 'Bearer ' + session['access_token']},
             json={'query': possible_hash_list}
         )
@@ -30,7 +31,9 @@ class SearchService:
             logging.error(Notifications.DATUM_QUERY_FAILED.format(search_datum, api_response.status_code))
             raise RuntimeError(Notifications.DATUM_QUERY_FAILED.format(search_datum, api_response.status_code))
 
-        logging.info(Notifications.DATUM_QUERY_SUCCESSFUL.format(search_datum, api_response.text))
-        print(Notifications.DATUM_QUERY_SUCCESSFUL.format(api_response.text))
+        response_json = json.loads(api_response.text)
+        logging.info(Notifications.DATUM_QUERY_SUCCESSFUL.format(len(response_json)))
+        print(Notifications.DATUM_QUERY_SUCCESSFUL.format(len(response_json)))
+        print(json.dumps(response_json, indent=2))
 
 
