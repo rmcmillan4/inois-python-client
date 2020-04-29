@@ -19,6 +19,7 @@ class Config:
         self.START_DATE = settings.get(ConfigKeys.START_DATE, None)
         self.END_DATE = settings.get(ConfigKeys.END_DATE, None)
         self.COLUMN_TO_SEARCH = settings.get(ConfigKeys.COLUMN_TO_SEARCH, None)
+        self.CHUNKED_FILES = []
 
     def __str__(self):
         return """

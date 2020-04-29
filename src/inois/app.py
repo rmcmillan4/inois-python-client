@@ -24,7 +24,7 @@ __license__ = "mit"
 @click.option('--input_file', prompt='input file', help='Path to the INOIS input configuration file.')
 @click.option('--mode', prompt='application mode (enter "upload" or "search")', help='Run the application in record upload or record search mode.')
 def run(input_file, log_file, mode):
-    """Entry point for the inois hashing application."""
+    """Entry point for the INOIS application."""
 
     log_level = logging.DEBUG if log_file else logging.CRITICAL
     log_location = log_file if log_file else "inois.log"
@@ -37,7 +37,7 @@ def run(input_file, log_file, mode):
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
     session = AuthenticationService(config).get_authorization()
-    print(session['access_token'])
+    #print(session['access_token'])
     FileService.validate_files(config)
     keys = KeyService.get_keys(config, session)
 

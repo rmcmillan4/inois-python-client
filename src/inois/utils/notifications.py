@@ -36,3 +36,5 @@ class Notifications:
     CURRENT_DATUM_QUERY = "Current datum query: {0}"
     DATUM_QUERY_FAILED = "Failed to query datum {0}, the server returned a response of '{1}'"
     DATUM_QUERY_SUCCESSFUL = "Successfully queried datum. {0} records located:"
+    CHUNKING_FILES = "Chunking csv files..."
+    CHUNKING_SUCCESSFUL = "chunking successful, file '{0}' will be processed as {1} chunk(s)"

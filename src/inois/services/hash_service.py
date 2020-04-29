@@ -4,15 +4,25 @@ import hashlib
 from inois.application_properties import *
 from inois.utils.notifications import Notifications
 from inois.utils.api_keys import ApiKeys
+import base64
 
 
 class HashService:
 
     @classmethod
     def hash_files(cls, config, keys):
+        logging.info(Notifications.CHUNKING_FILES)
+        print("\n" + Notifications.CHUNKING_FILES)
+
+        for file in config.FILES:
+            logging.info(Notifications.CURRENT_FILE.format(file))
+            print(Notifications.CURRENT_FILE.format(file))
+            cls.chunk_file(file, config)
+
         logging.info(Notifications.HASHING_FILES)
         print("\n" + Notifications.HASHING_FILES)
-        for file in config.FILES:
+
+        for file in config.CHUNKED_FILES:
             logging.info(Notifications.CURRENT_FILE.format(file))
             print(Notifications.CURRENT_FILE.format(file))
             data = cls.read_csv(file, config)
@@ -107,7 +117,25 @@ class HashService:
         logging.debug("writing hashed csv file {0}".format(file + HASHED_FILE_EXTENSION))
         data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv", encoding=DEFAULT_CSV_ENCODING)
         config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv")
-        data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", encoding=DEFAULT_CSV_ENCODING, compression='zip')
+        #data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", encoding=DEFAULT_CSV_ENCODING, compression='zip')
         #config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip")
         logging.info(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
         print(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
+        #
+        # with open(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", 'rb') as fin, open('output.zip.b64', 'wb') as fout:
+        #     test = base64.b64encode(fin.read())
+        #     fout.write(test)
+        # print("success")
+
+    @staticmethod
+    def chunk_file(file, config):
+        index = 1
+        for chunk in pandas.read_csv(file, chunksize=CSV_FILE_CHUNK_SIZE):
+            chunk.to_csv(file[:-4] + "_chunk_" + str(index) + ".csv", encoding=DEFAULT_CSV_ENCODING)
+            config.CHUNKED_FILES.append(file[:-4] + "_chunk_" + str(index) + ".csv")
+            index += 1
+
+        logging.info(Notifications.CHUNKING_SUCCESSFUL.format(file, str(index - 1)))
+        print(Notifications.CHUNKING_SUCCESSFUL.format(file, str(index - 1)))
+
+
