@@ -68,7 +68,7 @@ class TestHashServiceClass:
         mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "_hSmVyMTLi-Qo_rmISp8jrH5Aob7frHp1X-28sxQZAU="}
         HashService.hash_files(self.config, mock_keys)
         input_csv = pandas.read_csv(self.config.FILES[0], delimiter=self.config.CSV_DELIMITER, dtype=object, encoding=DEFAULT_CSV_ENCODING)
-        hashed_csv_file_name = self.config.FILES[0][:-4] + HASHED_FILE_EXTENSION + ".csv"
+        hashed_csv_file_name = self.config.FILES[0][:-4] + "_chunk_1" + HASHED_FILE_EXTENSION + ".csv"
         hashed_csv = pandas.read_csv(hashed_csv_file_name, delimiter=self.config.CSV_DELIMITER, dtype=object, encoding=DEFAULT_CSV_ENCODING)
         input_csv_columns = input_csv.columns.values.tolist()
         hashed_csv_columns = hashed_csv.columns.values.tolist()
@@ -79,8 +79,6 @@ class TestHashServiceClass:
             else:
                 assert column + HASHED_FILE_EXTENSION in hashed_csv_columns
                 assert input_csv[column][0] != hashed_csv[column + HASHED_FILE_EXTENSION][0]
-
-        os.remove(self.config.HASHED_FILES[0])
 
     def test_hash_records_for_search(self):
         mock_keys = {ApiKeys.SALT_KEYS: [{"value": "test-salt-key"}], ApiKeys.ENCRYPTION_KEY: "_hSmVyMTLi-Qo_rmISp8jrH5Aob7frHp1X-28sxQZAU="}
