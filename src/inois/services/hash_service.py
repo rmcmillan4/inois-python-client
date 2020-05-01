@@ -4,7 +4,6 @@ import hashlib
 from inois.application_properties import *
 from inois.utils.notifications import Notifications
 from inois.utils.api_keys import ApiKeys
-import base64
 
 
 class HashService:
@@ -117,15 +116,8 @@ class HashService:
         logging.debug("writing hashed csv file {0}".format(file + HASHED_FILE_EXTENSION))
         data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv", encoding=DEFAULT_CSV_ENCODING)
         config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv")
-        #data.to_csv(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", encoding=DEFAULT_CSV_ENCODING, compression='zip')
-        #config.HASHED_FILES.append(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip")
         logging.info(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
         print(Notifications.HASHING_SUCCESSFUL.format(file[:-4] + HASHED_FILE_EXTENSION + ".csv"))
-        #
-        # with open(file[:-4] + HASHED_FILE_EXTENSION + ".csv.zip", 'rb') as fin, open('output.zip.b64', 'wb') as fout:
-        #     test = base64.b64encode(fin.read())
-        #     fout.write(test)
-        # print("success")
 
     @staticmethod
     def chunk_file(file, config):
