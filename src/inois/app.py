@@ -3,6 +3,7 @@ import logging
 import os
 from datetime import datetime
 from inois.utils.banner import Banner
+from inois.utils.notifications import Notifications
 from inois.services.config_service import ConfigService
 from inois.services.file_service import FileService
 from inois.services.hash_service import HashService
@@ -32,8 +33,8 @@ def run(input_file, log_file, mode):
 
     application_mode = mode if mode == ApplicationModeKeys.SEARCH else ApplicationModeKeys.UPLOAD
 
-    logging.info("INOIS application Started in '{0}' mode at {1}".format(application_mode, datetime.now()))
-    print("INOIS application Started in '{0}' mode at {1}".format(application_mode, datetime.now()))
+    logging.info(Notifications.APPLICATION_STARTED.format(application_mode, datetime.now()))
+    print("\n" + Notifications.APPLICATION_STARTED.format(application_mode, datetime.now()))
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
     session = AuthenticationService(config).get_authorization()
@@ -43,16 +44,19 @@ def run(input_file, log_file, mode):
 
     if application_mode == ApplicationModeKeys.UPLOAD:
         HashService.hash_files(config, keys)
+        FileService.delete_chunked_files(config)
         EncryptionService.encrypt_files(config, keys)
+        FileService.delete_hashed_files(config)
         UploadService.upload_files(config, session)
+        FileService.delete_encrypted_files(config)
 
     elif application_mode == ApplicationModeKeys.SEARCH:
         search_queries = HashService.hash_records_for_search(config, keys)
         SearchService.search_on_all_queries(search_queries, session)
 
     os.chdir(config.LAUNCH_DIRECTORY)
-    logging.info("INOIS application terminated successfully at {0}".format(datetime.now()))
-    print("\nINOIS application terminated successfully at {0}".format(datetime.now()))
+    logging.info(Notifications.APPLICATION_TERMINATED.format(datetime.now()))
+    print("\n" + Notifications.APPLICATION_TERMINATED.format(datetime.now()))
 
 
 if __name__ == "__main__":

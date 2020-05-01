@@ -63,3 +63,18 @@ class FileService:
             else:
                 logging.info(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
                 print(Notifications.FILE_FOUND.format(os.path.join(config.WORKING_DIRECTORY, file)))
+
+    @staticmethod
+    def delete_encrypted_files(config):
+        for file in config.ENCRYPTED_FILES:
+            os.remove(file)
+
+    @staticmethod
+    def delete_chunked_files(config):
+        for file in config.CHUNKED_FILES:
+            os.remove(file)
+
+    @staticmethod
+    def delete_hashed_files(config):
+        for file in config.HASHED_FILES:
+            os.remove(file)

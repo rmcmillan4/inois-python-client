@@ -13,5 +13,5 @@ INOIS_API_URL = "https://gsu-inois-dev.azurewebsites.net"
 INOIS_API_KEY_SERVICE_ROUTE = "/api/keys"
 INOIS_API_UPLOAD_URL = "/api/upload"
 INOIS_API_SEARCH_URL = "/api/search"
-CSV_FILE_CHUNK_SIZE = 50
+CSV_FILE_CHUNK_SIZE = 10000
 

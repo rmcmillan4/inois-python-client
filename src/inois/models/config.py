@@ -30,7 +30,7 @@ Columns to Hash: {2}
 CSV Delimiter: '{3}'
 Column to Search: '{4}'
 Data Start Date: '{5}'
-Data End Date: '{5}'
+Data End Date: '{6}'
 ---------------------
         """.format(self.WORKING_DIRECTORY, self.FILES, self.COLUMNS_TO_HASH,
                    self.CSV_DELIMITER, self.COLUMN_TO_SEARCH, self.START_DATE,
