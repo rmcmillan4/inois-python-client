@@ -14,7 +14,6 @@ class SearchService:
 
         for query in search_queries:
             cls.execute_query(query, search_queries[query], session)
-            break
 
     @staticmethod
     def execute_query(search_datum, possible_hash_list, session):
