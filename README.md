@@ -1,13 +1,13 @@
 # INOIS Desktop Client
 
-A front-end Python 3 application for securing, transmitting, and searching on large data sets containing PID. 
+A front-end Python 3 CLI application for securing, transmitting, and searching on data sets containing PID. 
 
 ## Installation
 ### Mac OS / Linux
 - This project has been set up using PyScaffold 3.2.3. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
 
-This application was built using Python 3.8 and requires that Python 3 be installed on your machine.
+INOIS was built using Python 3.8 and requires that Python 3 be installed on your machine.
 To install the application, download and unpack the source code, and then navigate to the main project folder
 which contains the file 'setup.py'.  Then verify that the 'python' command in your terminal points to Python version 
 3 (not 2!) by executing the following command: 
@@ -16,7 +16,7 @@ which contains the file 'setup.py'.  Then verify that the 'python' command in yo
 python --version
 ```
 Note that many Mac OS machines come with Python 2.7 pre-installed and hence the above command will point to this version.
-In such cases the Python 3 distribution will be installed under then command 'python3', e.g., 
+In such cases the Python 3 distribution will be installed under then command 'python3', i.e., 
 ```
 python3 --version
 ```
@@ -48,16 +48,17 @@ For Windows machines, a binary executable version of the app is also available. 
 navigate to the 'windows-executable' folder in the source code and unpack the file 'app.zip' to the location on your 
 machine you wish to install the application into.  After unzipping 'app.zip', navigate inside the resulting folder.  The
 application executable will be present under the name 'app.exe'.  Note that this executable must be run from inside 
-this folder to ensure the application dependencies are satisfied.  Note also that running the application in this way
+this folder to ensure the application's dependencies are satisfied.  Note also that running the application in this way
 does not require that Python be installed on your Windows device.
 
 ## Additional Options When Running the App from the Command Line
-After installation, running the app from the command line is achieved by the following command:
+After installation, running the app from the command line is achieved via the following command:
 ```
 inois
 ```
-However, the location of the application's config file, the application mode (search or upload), and optional application
-logging can all be specified via flags from the command line when starting the app.  To set the input file location via 
+However, the location of the application's input file, the application mode, and optional application
+logging (see the application's documentation for further discussion of the application mode and input file) 
+can all be specified via flags from the command line when starting the app.  To set the input file location via 
 a flag use the '--input_file' option as:
 ```
 inois --input_file <path to your input file>
@@ -75,7 +76,7 @@ Note these options can be specified in any combination.  The following example c
 mode using an input file named 'input.txt' located in the user john.doe's Documents folder with application logging
 enabled and being written to the current directory in a file named 'inois.log':
 ```
-inois --input_file /Users/john.doe/input.txt --log_file inois.log --mode search
+inois --input_file /Users/john.doe/Documents/config_example.txt --log_file inois.log --mode search
 ```
 
 
