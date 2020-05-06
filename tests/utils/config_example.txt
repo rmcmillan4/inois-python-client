@@ -1,0 +1,11 @@
+{
+    'working_directory': './tests/utils',
+    'files': ['example_inois_data.csv'],
+    'columns_to_hash': ['SSN', 'Gov_Id'],
+    'authentication_client_id': '',
+    'authentication_tenant_authority': '',
+    'authentication_scope': '',
+    'data_start_date': '08-08-2018',
+    'data_end_date': '09-09-2019',
+    'column_to_search': 'SSN'
+}
