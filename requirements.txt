@@ -1,3 +1,9 @@
+requests
+cryptography
+msal
+pandas
+click
+datetime
 # =============================================================================
 # DEPRECATION WARNING:
 #
