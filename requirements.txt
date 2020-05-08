@@ -4,6 +4,7 @@ msal
 pandas
 click
 datetime
+logging
 # =============================================================================
 # DEPRECATION WARNING:
 #
