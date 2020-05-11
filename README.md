@@ -8,7 +8,13 @@ A front-end Python 3 CLI application for securing, transmitting, and searching o
 information on PyScaffold see https://pyscaffold.org/.
 
 INOIS was built using Python 3.8 and requires that Python 3 be installed on your machine.
-To install the application, download and unpack the source code, and then navigate to the main project folder
+To install the application, clone the source  code from the git repository by executing: 
+
+```
+git clone https://github.com/gsuinoisdev/inois-python-client.git
+```
+
+After successful cloning, navigate to the main project folder
 which contains the file 'setup.py'.  Then verify that the 'python' command in your terminal points to Python version 
 3 (not 2!) by executing the following command: 
 
