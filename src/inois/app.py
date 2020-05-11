@@ -38,7 +38,6 @@ def run(input_file, log_file, mode):
     print(Banner.TEXT)
     config = ConfigService.initialize_config(input_file=input_file)
     session = AuthenticationService(config).get_authorization()
-    #print(session['access_token'])
     FileService.validate_files(config)
     keys = KeyService.get_keys(config, session)
 
