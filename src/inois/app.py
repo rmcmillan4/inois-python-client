@@ -22,8 +22,8 @@ __license__ = "mit"
 
 @click.command()
 @click.option('--log_file', default=None, help='Location to write log file.')
-@click.option('--input_file', prompt='input file', help='Path to the INOIS input configuration file.')
-@click.option('--mode', prompt='application mode (enter "upload" or "search")', help='Run the application in record upload or record search mode.')
+@click.option('--input_file', prompt='Enter the location of the INOIS input configuration file', help='Path to the INOIS input configuration file.')
+@click.option('--mode', prompt='Enter the application mode (enter "upload" or "search")', help='Run the application in record upload or record search mode.')
 def run(input_file, log_file, mode):
     """Entry point for the INOIS application."""
 
